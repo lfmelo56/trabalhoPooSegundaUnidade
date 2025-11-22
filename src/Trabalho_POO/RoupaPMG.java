@@ -1,5 +1,6 @@
 package Trabalho_POO;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RoupaPMG extends Peca {
@@ -16,30 +17,43 @@ public class RoupaPMG extends Peca {
     }
 
     public void venda() {
-        Scanner kb = new Scanner(System.in);
-        System.out.println("Qual o tamanho? (P/M/G)");
-        char tam = kb.next().charAt(0);
-        boolean ok = false;
+        try {
+            Scanner kb = new Scanner(System.in);
+            boolean ok = false;
 
-        do {
-            if (tam == 'P' || tam == 'p') {
-                this.quantidadeP--;
-                ok = true;
+            do {
+                System.out.println("Qual o tamanho? (P/M/G)");
+                char tam = kb.next().toUpperCase().charAt(0);
+                if (tam == 'P') {
+                    this.quantidadeP--;
+                    ok = true;
 
-            } else if (tam == 'M' || tam == 'm') {
-                this.quantidadeM--;
-                ok = true;
+                } else {
+                    if (tam == 'M') {
+                        if (this.quantidadeP <= 0) {
+                            System.out.println("Erro: Estoque insuficiente para tamanho M!");
+                        }
+                    this.quantidadeM--;
+                    ok = true;
 
-            } else if (tam == 'G' || tam == 'g') {
-                this.quantidadeG--;
-                ok = true;
+                    } else {
+                        if (tam == 'G') {
+                            if (this.quantidadeP <= 0) {
+                                System.out.println("Erro: Estoque insuficiente para tamanho G!");
+                            }
+                        this.quantidadeG--;
+                        ok = true;
 
-            } else {
-                System.out.println("Op inválida. Escolha P, M ou G.");
-            }
-
-        } while (!ok);
-        setQuantidade(quantidadeP + quantidadeM + quantidadeG);
+                        } else {
+                            System.out.println("Op inválida. Escolha P, M ou G.");
+                        }
+                    }
+                }
+            } while (!ok);
+            setQuantidade(quantidadeP + quantidadeM + quantidadeG);
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida! Por favor, insira um caractere válido.");
+        } 
     }
 
     public void reposicaoEstoque() {
@@ -67,6 +81,7 @@ public class RoupaPMG extends Peca {
         return quantidadeG;
     }
 
+    @Override
     public void mostrarEstoqueTamanhos(){
         System.out.println(  "P: " + quantidadeP +
                 " | M: " + quantidadeM +

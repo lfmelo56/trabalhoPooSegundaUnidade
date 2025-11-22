@@ -1,5 +1,6 @@
 package Trabalho_POO;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -14,55 +15,58 @@ public class Main {
         estoque[3] = new Acessorio("Pulseira", 20, 5, 30);
         estoque[4] = new RoupaPMG("Saída de praia", 5, 5, 5, 2, 10);
 
-        int opcao = -1;
-        String Menu = """
-                0 – Camisa
-                1 – Saia
-                2 – Cinto
-                3 – Pulseira
-                4 – Saída de praia
-                5 – Sair do sistema
-                Escolha uma opção:
-                """;
+        try {
+            int opcao = -1;
+            String menu = "0 – Camisa\n"
+                    + "1 – Saia\n"
+                    + "2 – Cinto\n"
+                    + "3 – Pulseira\n"
+                    + "4 – Saída de praia\n"
+                    + "5 – Sair do sistema\n"
+                    + "Escolha uma opção:";
 
-        while (opcao != 5) {
-            System.out.println("\n--- SISTEMA DE CONTROLE DE ESTOQUE ---");
-            System.out.println(Menu);
+            while (opcao != 5) {
+                System.out.println("\n--- SISTEMA DE CONTROLE DE ESTOQUE ---");
+                System.out.println(menu);
 
-            opcao = scanner.nextInt();
+                opcao = scanner.nextInt();
 
-            if (opcao >= 0 && opcao <= 4) {
-                Peca produto = estoque[opcao];
+                if (opcao >= 0 && opcao <= 4) {
+                    Peca produto = estoque[opcao];
 
-                System.out.println("\nProduto: " + produto.getDescricao());
-                System.out.println("Estoque atual: " + produto.getQuantidade());
+                    System.out.println("\nProduto: " + produto.getDescricao());
+                    System.out.println("Estoque atual: " + produto.getQuantidade());
 
-                produto.venda();
+                    produto.venda();
 
-                produto.reposicaoEstoque();
+                    produto.reposicaoEstoque();
 
-                System.out.println("Estoque atualizado: " + produto.getQuantidade());
+                    System.out.println("Estoque atualizado: " + produto.getQuantidade());
 
-            } else if (opcao == 5) {
-                System.out.println("\n---------------------------------------");
-                System.out.println("       ESTOQUE FINAL DOS PRODUTOS");
-                System.out.println("---------------------------------------");
+                } else if (opcao == 5) {
+                    System.out.println("\n---------------------------------------");
+                    System.out.println("       ESTOQUE FINAL DOS PRODUTOS");
+                    System.out.println("---------------------------------------");
 
-                for (int i = 0; i < estoque.length; i++) {
-                    Peca produto = estoque[i];
-                    System.out.println("\n" + i + " - " + produto.getDescricao());
-                    System.out.println("   Estoque: " + produto.getQuantidade());
+                    for (int i = 0; i < estoque.length; i++) {
+                        Peca produto = estoque[i];
+                        System.out.println("\n" + i + " - " + produto.getDescricao());
+                        System.out.println("   Estoque: " + produto.getQuantidade());
 
-                    produto.mostrarEstoqueTamanhos();
+                        produto.mostrarEstoqueTamanhos();
+                    }
+
+                    System.out.println("\n---------------------------------------");
+                    System.out.println("           Sistema encerrado!\n                  :D");
+                    System.out.println("---------------------------------------");
+
+                } else {
+                    System.out.println("\nOp inválida! Tente novamente.");
                 }
-
-                System.out.println("\n---------------------------------------");
-                System.out.println("           Sistema encerrado!\n                  :D");
-                System.out.println("---------------------------------------");
-
-            } else {
-                System.out.println("\nOp inválida! Tente novamente.");
             }
-        }
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida! Por favor, insira um número válido.");
+        } 
+        scanner.close();
     }
 }
