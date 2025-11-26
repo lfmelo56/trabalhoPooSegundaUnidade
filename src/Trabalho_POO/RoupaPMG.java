@@ -3,17 +3,24 @@ package Trabalho_POO;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class RoupaPMG extends Peca {
+public class RoupaPMG implements Item {
     private int quantidadeP;
     private int quantidadeM;
     private int quantidadeG;
+    private int quantidade;  
+    private int getEstoqueMinimo() {
+        return 5;  
+    }
 
-    public RoupaPMG(String descricao, int quantidadeP, int quantidadeM, int quantidadeG,
-                    int estoqueMinimo, int estoqueMaximo) {
-        super(descricao, (quantidadeP + quantidadeM + quantidadeG), estoqueMinimo, estoqueMaximo);
+    public RoupaPMG(String descricao, int quantidadeP, int quantidadeM, int quantidadeG, int estoqueMinimo, int estoqueMaximo) {
         this.quantidadeP = quantidadeP;
         this.quantidadeM = quantidadeM;
         this.quantidadeG = quantidadeG;
+        this.quantidade = quantidadeP + quantidadeM + quantidadeG;
+    }
+
+    private int getEstoqueMaximo() {
+        return 10; 
     }
 
     public void venda() {
@@ -23,7 +30,12 @@ public class RoupaPMG extends Peca {
 
             do {
                 System.out.println("Qual o tamanho? (P/M/G)");
-                char tam = kb.next().toUpperCase().charAt(0);
+                String input = kb.next();
+                if (input.length() == 0) {
+                    System.out.println("Entrada inválida. Escolha P, M ou G.");
+                    continue;
+                }
+                char tam = input.toUpperCase().charAt(0);
                 if (tam == 'P') {
                     this.quantidadeP--;
                     ok = true;
@@ -71,6 +83,10 @@ public class RoupaPMG extends Peca {
 
     public int getQuantidadeG() {
         return quantidadeG;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     @Override

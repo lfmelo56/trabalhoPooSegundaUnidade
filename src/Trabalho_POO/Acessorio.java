@@ -3,7 +3,7 @@ package Trabalho_POO;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Acessorio extends Peca {
+public class Acessorio extends Peca implements Item{
     public Acessorio(String descricao, int quantidade, int estoqueMinimo, int estoqueMaximo) {
         super(descricao, quantidade, estoqueMinimo, estoqueMaximo);
     }

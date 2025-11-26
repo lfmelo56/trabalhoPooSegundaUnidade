@@ -5,4 +5,5 @@ public interface Item {
     public void reposicaoEstoque();
     public String getDescricao();
     public int getQuantidade();
+    public void mostrarEstoqueTamanhos();
 }

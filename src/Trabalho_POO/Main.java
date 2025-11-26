@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Peca[] estoque = new Peca[5];
+        Item[] estoque = new Item[5];
 
         estoque[0] = new Acessorio("Camisa", 10, 2, 20);
         estoque[1] = new RoupaTamanhoUnico("Saia", 15, 3, 25);
@@ -32,7 +32,7 @@ public class Main {
                 opcao = scanner.nextInt();
 
                 if (opcao >= 0 && opcao <= 4) {
-                    Peca produto = estoque[opcao];
+                    Item produto = estoque[opcao];
 
                     System.out.println("\nProduto: " + produto.getDescricao());
                     System.out.println("Estoque atual: " + produto.getQuantidade());
@@ -49,7 +49,7 @@ public class Main {
                     System.out.println("---------------------------------------");
 
                     for (int i = 0; i < estoque.length; i++) {
-                        Peca produto = estoque[i];
+                        Item produto = estoque[i];
                         System.out.println("\n" + i + " - " + produto.getDescricao());
                         System.out.println("   Estoque: " + produto.getQuantidade());
 
