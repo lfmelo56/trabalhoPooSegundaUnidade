@@ -111,8 +111,8 @@ public class RoupaPMG implements Item {
 
     @Override
     public void mostrarEstoqueTamanhos() {
-        System.out.println("   Estoque P: " + quantidadeP);
-        System.out.println("   Estoque M: " + quantidadeM);
-        System.out.println("   Estoque G: " + quantidadeG);
+        System.out.println("P: " + quantidadeP +
+                " | M: " + quantidadeM +
+                " | G: " + quantidadeG);
     }
 }
